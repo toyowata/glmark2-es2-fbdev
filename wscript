@@ -135,6 +135,10 @@ def configure(ctx):
         ctx.env.prepend_value('CXXFLAGS', '-g')
     if Options.options.mali:
         ctx.env.append_unique('DEFINES','HAS_MALI=1')
+        ctx.env.append_unique('DEFINES','EGL_FBDEV=1')
+        ctx.env.append_unique('LIB', 'mali')
+        ctx.env.append_unique('LIB', 'drm')
+
 
     ctx.env.HAVE_EXTRAS = False
     if Options.options.extras_path is not None:

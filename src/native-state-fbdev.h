@@ -32,7 +32,7 @@
 
 #if 1 /////def HAS_MALI
 #include <EGL/egl.h>
-#include <EGL/eglplatform_fb.h>
+#include <EGL/eglplatform.h>
 #endif
 
 class NativeStateFBDEV : public NativeState
@@ -56,7 +56,7 @@ private:
     int fd;
     WindowProperties winprops;
 #if 1 //////#def HAS_MALI
-    struct mali_native_window native_window;
+    struct fbdev_window native_window;
 #endif
     bool init();
     void cleanup();
