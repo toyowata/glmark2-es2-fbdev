@@ -27,6 +27,11 @@
 #include <string>
 #include <sstream>
 
+#if MALI_STREAMLINE_ANNOTATE
+#include "streamline_annotate.h"
+static int frame;
+#endif
+
 /************
  * MainLoop *
  ************/
@@ -46,6 +51,9 @@ MainLoop::reset()
     score_ = 0;
     benchmarks_run_ = 0;
     bench_iter_ = benchmarks_.begin();
+#if MALI_STREAMLINE_ANNOTATE
+    frame = 0;
+#endif
 }
 
 unsigned int
@@ -129,7 +137,11 @@ void
 MainLoop::draw()
 {
     canvas_.clear();
-
+#if MALI_STREAMLINE_ANNOTATE
+    char buf[20];
+    sprintf(buf, "frame: %d", frame++);
+    ANNOTATE_MARKER_COLOR_STR(ANNOTATE_RED, buf);
+#endif
     scene_->draw();
     scene_->update();
 

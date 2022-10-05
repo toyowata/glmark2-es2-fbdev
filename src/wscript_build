@@ -1,4 +1,4 @@
-all_sources = bld.path.ant_glob('*.cpp scene-ideas/*.cc scene-terrain/*.cpp')
+all_sources = bld.path.ant_glob('*.cpp scene-ideas/*.cc scene-terrain/*.cpp *.c')
 common_sources = [f for f in all_sources if f.name.find('canvas-') == -1 and
                                             f.name.find('android') == -1 and
                                             f.name.find('native-state-') == -1 and
@@ -56,7 +56,7 @@ for name in bld.env.keys():
             source       = common_sources + flavor_sources[flavor],
             target       = target,
             use          = common_uselibs + flavor_uselibs[flavor],
-            lib          = ['m', 'jpeg', 'dl'],
+            lib          = ['m', 'jpeg', 'dl', 'pthread'],
             includes     = includes,
             defines      = common_defines + flavor_defines[flavor]
             )

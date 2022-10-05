@@ -34,6 +34,10 @@
 
 #include "canvas-generic.h"
 
+#if MALI_STREAMLINE_ANNOTATE
+#include "streamline_annotate.h"
+#endif
+
 #if GLMARK2_USE_X11
 #include "native-state-x11.h"
 #elif GLMARK2_USE_DRM
@@ -206,6 +210,9 @@ main(int argc, char *argv[])
     canvas.print_info();
     Log::info("=======================================================\n");
 
+#if MALI_STREAMLINE_ANNOTATE
+    ANNOTATE_SETUP;
+#endif
     canvas.visible(true);
 
     if (Options::validate)
